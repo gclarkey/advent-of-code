@@ -1,0 +1,19 @@
+package ie.gc.aoc.aoc2022;
+
+import ie.gc.aoc.aoc2022.day1.Day1;
+import ie.gc.aoc.input.FileInput;
+import ie.gc.aoc.input.Input;
+
+public class Aoc2022 {
+
+    public static void main(final String[] args) {
+        System.out.println("Aoc2022::main");
+
+        final Input input = new FileInput();
+
+        System.out.println("\n\n**** DAY 1 ****");
+        final Day1 day1 = new Day1(input);
+        day1.doSomething();
+    }
+
+}
