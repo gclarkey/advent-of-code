@@ -1,8 +1,8 @@
-package ie.gc.aoc;
+package ie.gc.aoc.aoc2020;
 
-import ie.gc.aoc.day1.Day1;
-import ie.gc.aoc.day2.Day2;
-import ie.gc.aoc.day3.Day3;
+import ie.gc.aoc.aoc2020.day1.Day1;
+import ie.gc.aoc.aoc2020.day2.Day2;
+import ie.gc.aoc.aoc2020.day3.Day3;
 import ie.gc.aoc.input.FileInput;
 import ie.gc.aoc.input.Input;
 

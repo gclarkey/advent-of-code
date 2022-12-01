@@ -1,4 +1,4 @@
-package ie.gc.aoc.day3;
+package ie.gc.aoc.aoc2020.day3;
 
 import ie.gc.aoc.input.Input;
 
