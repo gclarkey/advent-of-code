@@ -15,7 +15,7 @@ public class Day1 {
     }
 
     public void doSomething() {
-        final List<String> stringInput = input.fetchInput("/day1/expense-report.txt");
+        final List<String> stringInput = input.fetchInput("/2020/day1/expense-report.txt");
         final List<Integer> expenseReport = stringInput.stream()
                                                        .map(Integer::valueOf)
                                                        .sorted(Comparator.comparing(Integer::valueOf))

@@ -14,7 +14,7 @@ public class Day2 {
     }
 
     public void doSomething() {
-        final List<String> stringInput = input.fetchInput("/day2/password-list.txt");
+        final List<String> stringInput = input.fetchInput("/2020/day2/password-list.txt");
 
         final List<PasswordRecord> passwordRecords = convert(stringInput);
         validatePasswords(passwordRecords);

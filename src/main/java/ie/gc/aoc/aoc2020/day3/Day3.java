@@ -13,7 +13,7 @@ public class Day3 {
     }
 
     public void doSomething() {
-        final List<String> stringInput = input.fetchInput("/day3/map.txt");
+        final List<String> stringInput = input.fetchInput("/2020/day3/map.txt");
         System.out.println("stringInput.size()="+stringInput.size());
 
         final int treesEncountered_3_1 = numberOfTreesEncountered(stringInput, 3, 1);
