@@ -19,30 +19,41 @@ public class Day1 {
         final List<Integer> caloriesPerElf = new ArrayList<>();
 
         int runningTotal = 0;
-        for(final String line : stringInput){
-
-            if(line.isEmpty()){
+        for (final String line : stringInput) {
+            if (line.isEmpty()) {
                 caloriesPerElf.add(runningTotal);
-                runningTotal=0;
+                runningTotal = 0;
             } else {
                 runningTotal += Integer.parseInt(line);
             }
         }
         caloriesPerElf.add(runningTotal);
 
-        int elf =0;
-        int elfCalories=0;
-        for(int i=0; i<caloriesPerElf.size(); i++){
-                if(caloriesPerElf.get(i) > elfCalories){
-                    elfCalories = caloriesPerElf.get(i);
-                    elf=i;
-                }
+        final Elf elf1 = getElfWithMostCalories(caloriesPerElf);
+        System.out.println(elf1);
+        caloriesPerElf.remove(elf1.getId());
+
+        final Elf elf2 = getElfWithMostCalories(caloriesPerElf);
+        System.out.println(elf2);
+        caloriesPerElf.remove(elf2.getId());
+
+        final Elf elf3 = getElfWithMostCalories(caloriesPerElf);
+        System.out.println(elf3);
+        caloriesPerElf.remove(elf3.getId());
+
+        System.out.println(elf1.getCalories() + elf2.getCalories() + elf3.getCalories());
+
+    }
+
+    private Elf getElfWithMostCalories(final List<Integer> caloriesPerElf) {
+        final Elf elfWithMostCalories = new Elf();
+        for (int i = 0; i < caloriesPerElf.size(); i++) {
+            if (caloriesPerElf.get(i) > elfWithMostCalories.getCalories()) {
+                elfWithMostCalories.setCalories(caloriesPerElf.get(i));
+                elfWithMostCalories.setId(i);
+            }
         }
-
-        System.out.println(elf);
-        System.out.println(elfCalories);
-        System.out.println(caloriesPerElf.get(elf));
-
+        return elfWithMostCalories;
     }
 
 }
