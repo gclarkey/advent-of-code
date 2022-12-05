@@ -41,6 +41,20 @@ public class Day2 {
         }
 
         System.out.println(totalScore);
+
+
+        int totalScoreSneaky = 0;
+
+        for(final String round : stringInput){
+            final char opponentShape = round.charAt(0);
+            final char requiredResult = round.charAt(2);
+            final Shape myShape = determineRequiredShape(ABC_SHAPE.get(opponentShape), requiredResult);
+
+            final int roundScoreSneaky = calculateScore(ABC_SHAPE.get(opponentShape), myShape);
+            totalScoreSneaky += roundScoreSneaky;
+        }
+
+        System.out.println(totalScoreSneaky);
     }
 
     private int calculateScore(final Shape opponentShape, final Shape myShape) {
@@ -75,6 +89,37 @@ public class Day2 {
             roundScore+=3;
 
         return roundScore;
+    }
+
+    private Shape determineRequiredShape(final Shape opponentShape, final char requiredResult) {
+        final char lose = 'X';
+        final char draw = 'Y';
+
+        final Shape requiredShape;
+
+        // lose
+        if(requiredResult == lose){
+            if(opponentShape == ROCK)
+                requiredShape = SCISSORS;
+            else if(opponentShape == PAPER)
+                requiredShape = ROCK;
+            else
+                requiredShape = PAPER;
+        }
+        // draw
+        else if(requiredResult == draw)
+            requiredShape = opponentShape;
+        // win
+        else{
+            if(opponentShape == ROCK)
+                requiredShape = PAPER;
+            else if(opponentShape == PAPER)
+                requiredShape = SCISSORS;
+            else
+                requiredShape = ROCK;
+        }
+
+        return  requiredShape;
     }
 
 }
