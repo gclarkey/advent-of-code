@@ -2,14 +2,29 @@ package ie.gc.aoc.aoc2022.day2;
 
 import ie.gc.aoc.input.Input;
 
+import java.util.HashMap;
 import java.util.List;
+
+import static ie.gc.aoc.aoc2022.day2.Shape.PAPER;
+import static ie.gc.aoc.aoc2022.day2.Shape.ROCK;
+import static ie.gc.aoc.aoc2022.day2.Shape.SCISSORS;
 
 public class Day2 {
 
     private final Input input;
+    private final HashMap<Character, Shape> ABC_SHAPE = new HashMap<>();
+    private final HashMap<Character, Shape> XYZ_SHAPE = new HashMap<>();
 
     public Day2(final Input input) {
         this.input = input;
+
+        ABC_SHAPE.put('A', ROCK);
+        ABC_SHAPE.put('B', PAPER);
+        ABC_SHAPE.put('C', SCISSORS);
+
+        XYZ_SHAPE.put('X', ROCK);
+        XYZ_SHAPE.put('Y', PAPER);
+        XYZ_SHAPE.put('Z', SCISSORS);
     }
 
     public void doSomething() {
@@ -21,14 +36,14 @@ public class Day2 {
             final char opponentShape = round.charAt(0);
             final char myShape = round.charAt(2);
 
-            final int roundScore = calculateScore(opponentShape, myShape);
+            final int roundScore = calculateScore(ABC_SHAPE.get(opponentShape), XYZ_SHAPE.get(myShape));
             totalScore += roundScore;
         }
 
         System.out.println(totalScore);
     }
 
-    private int calculateScore(final char opponentShape, final char myShape) {
+    private int calculateScore(final Shape opponentShape, final Shape myShape) {
         // shape    | opponent | me
         // rock     | A        | X
         // paper    | B        | Y
@@ -37,33 +52,26 @@ public class Day2 {
         int roundScore = 0;
 
         // points for shape choice (bit weird)
-        if(myShape == 'X')
+        if(myShape == ROCK)
             roundScore+=1;
-        else if (myShape == 'Y')
+        else if (myShape == PAPER)
             roundScore+=2;
-        else if (myShape == 'Z')
+        else if (myShape == SCISSORS)
             roundScore+=3;
 
         // 6 points for winning
         // rock beats scissors
-        if(myShape == 'X' && opponentShape == 'C')
+        if(myShape == ROCK && opponentShape == SCISSORS)
             roundScore+=6;
         // paper beats rock
-        else if (myShape == 'Y' && opponentShape == 'A')
+        else if (myShape == PAPER && opponentShape == ROCK)
             roundScore+=6;
         //scissors beats paper
-        else if (myShape == 'Z' && opponentShape == 'B')
+        else if (myShape == SCISSORS && opponentShape == PAPER)
             roundScore+=6;
 
         // 3 points for drawing
-        // rock
-        if(myShape == 'X' && opponentShape == 'A')
-            roundScore+=3;
-        // paper
-        else if (myShape == 'Y' && opponentShape == 'B')
-            roundScore+=3;
-        //scissors
-        else if (myShape == 'Z' && opponentShape == 'C')
+        if(myShape == opponentShape)
             roundScore+=3;
 
         return roundScore;
