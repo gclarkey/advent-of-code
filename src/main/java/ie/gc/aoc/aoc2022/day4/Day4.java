@@ -19,22 +19,28 @@ public class Day4 {
         final List<String> stringInput = input.fetchInput("/2022/day4/assignments.txt");
 
         int containsTheOther = 0;
+        int overlaps = 0;
 
         for (final String assignment : stringInput) {
-            final String[] splitAssignment = assignment.split(",");
-            final String elf1Assignment = splitAssignment[0];
-            final String elf2Assignment = splitAssignment[1];
-
-            if (containsTheOther(elf1Assignment, elf2Assignment)) {
+            if (containsTheOther(assignment)) {
                 containsTheOther++;
+            }
+
+            if (overlaps(assignment)) {
+                overlaps++;
             }
         }
 
         System.out.println(containsTheOther);
+        System.out.println(overlaps);
     }
 
-    private static boolean containsTheOther(final String elf1Assignment, final String elf2Assignment) {
+    private static boolean containsTheOther(final String assignment) {
         boolean containsTheOther = false;
+
+        final String[] splitAssignment = assignment.split(",");
+        final String elf1Assignment = splitAssignment[0];
+        final String elf2Assignment = splitAssignment[1];
 
         final String[] elf1AssignmentSplit = elf1Assignment.split("-");
         final int elf1Start = Integer.parseInt(elf1AssignmentSplit[0]);
@@ -53,6 +59,32 @@ public class Day4 {
         }
 
         return containsTheOther;
+    }
+
+    private static boolean overlaps(final String assignment) {
+        boolean overlaps = false;
+
+        final String[] splitAssignment = assignment.split(",");
+        final String elf1Assignment = splitAssignment[0];
+        final String elf2Assignment = splitAssignment[1];
+
+        final String[] elf1AssignmentSplit = elf1Assignment.split("-");
+        final int elf1Start = Integer.parseInt(elf1AssignmentSplit[0]);
+        final int elf1End = Integer.parseInt(elf1AssignmentSplit[1]);
+
+        final String[] elf2AssignmentSplit = elf2Assignment.split("-");
+        final int elf2Start = Integer.parseInt(elf2AssignmentSplit[0]);
+        final int elf2End = Integer.parseInt(elf2AssignmentSplit[1]);
+
+        if (elf1Start <= elf2Start && elf1End >= elf2Start) {
+            overlaps = true;
+        }
+
+        if (elf2Start <= elf1Start && elf2End >= elf1Start) {
+            overlaps = true;
+        }
+
+        return overlaps;
     }
 
 }
