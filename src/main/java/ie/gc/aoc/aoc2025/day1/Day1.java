@@ -16,34 +16,53 @@ public class Day1 {
         System.out.println(stringInput);
 
         int position = 50;
-        int zeroCount = 0;
+        int atOrPassesZero = 0;
 
         for (final String rotation : stringInput) {
+            System.out.println("--------------------------------");
+            final int startingPosition = position;
+            System.out.println("Starting position: " + startingPosition);
+            System.out.println("Input rotation: " + rotation);
 
             final char direction = rotation.toUpperCase(Locale.getDefault())
                 .charAt(0);
             final int distance = Integer.parseInt(rotation.substring(1));
             final int distanceToMove = distance % 100;
-            System.out.println(direction + "-" + distance + "-" + distanceToMove);
+            final int loops = distance / 100;
+            System.out.println("Parsed data: " + direction + "-" + distance + "-" + distanceToMove  + "-" + loops);
+            System.out.println("Loops: " + loops);
 
+            atOrPassesZero += loops;
+
+            final int interimPosition;
             if (direction == 'R') {
-                position += distanceToMove;
-                if (position > 99) {
-                    position -= 100;
+                interimPosition = startingPosition + distanceToMove;
+            } else {
+                interimPosition = startingPosition - distanceToMove;
+            }
+
+            System.out.println("Interim position: " + interimPosition);
+
+            final int finalPosition;
+            if (interimPosition == 0) {
+                atOrPassesZero++;
+                finalPosition = interimPosition;
+            } else if (interimPosition > 99) {
+                finalPosition = interimPosition - 100;
+                atOrPassesZero++;
+            } else if (interimPosition < 0) {
+                finalPosition = interimPosition + 100;
+                if (startingPosition!=0) {
+                    atOrPassesZero++;
                 }
             } else {
-                position -= distanceToMove;
-                if (position < 0) {
-                    position += 100;
-                }
+                finalPosition = interimPosition;
             }
 
-            if (position == 0) {
-                zeroCount++;
-            }
+            System.out.println("Final position: " + finalPosition);
+            System.out.println("Passes Zero: " + atOrPassesZero);
 
-            System.out.println("Current position: " + position + " - Zero Count: " + zeroCount);
-
+            position = finalPosition;
         }
 
     }
