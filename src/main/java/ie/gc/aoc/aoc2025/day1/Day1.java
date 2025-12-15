@@ -8,15 +8,10 @@ import java.util.Locale;
 
 public class Day1 {
 
-    static void main(final String[] args) {
+    void main() {
         System.out.println("Aoc2025::Day1");
 
         final Input input = new FileInput();
-
-        doSomething(input);
-    }
-
-    private static void doSomething(final Input input) {
         final List<String> stringInput = input.fetchInput("/2025/day1/rotations.txt");
         System.out.println(stringInput);
 
